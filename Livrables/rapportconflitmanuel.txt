@@ -1,0 +1,44 @@
+Liste des Salles de conflit": 
+
+Salle 4: 
+
+A.
+start:2018-03-15 08:30:00", 
+end:"2018-03-15 10:30:00", 
+cours:"[M. REUNGOAT] Suivi de Projet transversal NAO",  
+promotion:"EPSI I4"
+
+B.
+ce cours n’as pas de conflit mais il est quand même prit en compte 
+start:"2018-03-15 10:45:00", 
+end:"2018-03-15 12:45:00",
+ cours:"[M. COLLOMB] Communication d'Entreprise"
+promotion: "EPSI I4"
+
+
+
+Rentre en conflit avec  le créneau A.
+C.
+start:"2018-03-15 08:30:00", 
+end:"2018-03-15 10:30:00", 
+cours:[M. REUNGOAT] Suivi de Projet transversal NAO"
+promotion:«EPSI I5»
+
+
+
+
+Amphi:
+A.
+start:[["2018-03-15 13:45:00", 
+end:"2018-03-15 15:45:00", 
+cours:"[CROSSKNOWLEDGE] Spécialisation nationale",  
+promotion": "IFAG MECP2" 
+
+
+Rentre en conflit avec  le créneau A
+
+B.
+start:["2018-03-15 13:45:00"
+end: "2018-03-15 14:45:00", 
+cours:"QCM Crossknowledge", 
+promotion: "IFAG MECP2"
