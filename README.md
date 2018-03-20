@@ -26,3 +26,21 @@ Bibliothèques tier installé avec la biblithèque de l'api google :
 -[uritemplate](https://github.com/python-hyper/uritemplate) 
 
 -[httplib22](https://github.com/python-hyper/uritemplate)
+
+
+ Pour l'installation il faut utiliser  `pip` ou 'easy_install' 
+```bash
+$ pip install --upgrade google-api-python-client
+```
+
+```bash
+$pip install nose
+```
+
+``bash
+$pip install oauth2client
+```
+
+
+Par ailleurs vous aurez besoin de créer votre propre client.secret.json 
+Je vous redirige vers  le tutoriel de [l'API](https://developers.google.com/calendar/quickstart/python)
