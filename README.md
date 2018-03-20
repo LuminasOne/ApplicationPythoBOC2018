@@ -14,7 +14,7 @@ Prérequis: vous devez possédez le module pip pour installer ces différentes b
 Voici les bibliothèques nécessaires  :
   
   
-- [google-api-python-client](https://github.com/google/google-api-python-client)
+-[google-api-python-client](https://github.com/google/google-api-python-client)
 
 -[nose](https://github.com/nose-devs/nose)
 
