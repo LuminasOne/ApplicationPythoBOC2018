@@ -10,6 +10,7 @@ la réalisation du projet c’est faite sur Windows 8.1 64 bits.
 Le code comporte des test unitaires
 
 liste COMPLÈTE des imports utilisé dans le cadre de la réalisation du script
+
 //coding:utf-8
 
 from __future__ import print_function
