@@ -1,8 +1,12 @@
 
 adresse utilisé pour la connexion et utilisation de l’API:nkstageboc@gmail.com
+
 mot de passe : password
+
 adresse de test pour  des messages réception : masterzabi@gmail.com
+
 la réalisation du projet c’est faite sur Windows 8.1 64 bits. 
+
 Le code comporte des test unitaires
 
 liste COMPLÈTE des imports utilisé dans le cadre de la réalisation du script
