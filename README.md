@@ -8,3 +8,21 @@ La version de python utilisé est la dernière version 3.6 et j'utilise l'ide py
 
 
 StagiaireDuBrestOpenCampus EPSIB2
+
+Prérequis: vous devez possédez le module pip pour installer ces différentes biblithèques 
+
+Voici les bibliothèques nécessaires  :
+  
+  
+- [google-api-python-client](https://github.com/google/google-api-python-client)
+
+-[nose](https://github.com/nose-devs/nose)
+
+-[oauth2client](https://github.com/google/oauth2client) (pour l'authentifcation au google agenda)
+			     
+          
+Bibliothèques tier installé avec la biblithèque de l'api google :
+
+-[uritemplate](https://github.com/python-hyper/uritemplate) 
+
+-[httplib22](https://github.com/python-hyper/uritemplate)
