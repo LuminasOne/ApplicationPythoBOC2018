@@ -37,7 +37,7 @@ $ pip install --upgrade google-api-python-client
 $pip install nose
 ```
 
-``bash
+```bash
 $pip install oauth2client
 ```
 
