@@ -56,4 +56,5 @@ from email import  encoders
 
 liens pertinents : 	https://developers.google.com/calendar/quickstart/python 
 			https://developers.google.com/calendar/v3/reference/events 
+
 installation des packets noses pour les test unitaires.
