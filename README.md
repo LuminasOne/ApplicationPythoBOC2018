@@ -45,7 +45,7 @@ $pip install oauth2client
 Par ailleurs vous aurez besoin de créer votre propre client.secret.json 
 Je vous redirige vers  le tutoriel de [l'API](https://developers.google.com/calendar/quickstart/python)
 
-#Exécutions du script.
+# Exécution du script.
 
 Pour lancer le script il faudra d'abords changer les adresses dans la fonction send notifications  par des adresses personnelles , vous assurrez que vous avez bien un fichier clientsecret.json
 
