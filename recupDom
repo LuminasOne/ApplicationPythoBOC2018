@@ -1,0 +1,302 @@
+using System;
+using System.Net;
+using System.IO;
+using System.Linq;
+using System.Collections.Generic;
+using System.Text.RegularExpressions;
+
+namespace recupDom
+{
+	class MainClass
+	{
+		public static void Main (string[] args)
+		{
+			Console.WriteLine(getTitlesCommunique()[2]);
+			Console.WriteLine("----------------------");
+
+			Console.WriteLine(getParagraphes(getLinksCommunique(2)));
+		}
+
+		public static string getHtml(string link)
+		{
+			// WebClient object
+			WebClient client = new WebClient();
+
+			// Retrieve resource as a stream
+			try
+			{
+				Stream data = client.OpenRead(new Uri(link));
+				
+
+				// Retrieve the text
+				StreamReader reader = new StreamReader(data);
+				string htmlContent = reader.ReadToEnd();
+
+
+
+				// Cleanup
+				data.Close();
+				reader.Close();
+				
+
+				return htmlContent;
+			}
+			catch
+			{
+				return "error";
+			}
+		}
+
+		public static List<String> getTitlesCommunique()
+		{
+			string[] tabHtml = getHtml("http://www.cium.be/fr/actualites/").Split('\n');
+			string titles = "";
+
+			//Separation tableaux communiques de presse et actualités du cium
+
+			int debutTab = 0;
+			int finTab = 0;
+			for (int i = 0; i < tabHtml.Length; i++) 
+			{
+				if (tabHtml[i] == "<div class=\"news-list  news-list-cat-id-5 orange\">")
+				{
+					debutTab = i;
+				}
+
+				if (tabHtml[i] == "<div class=\"news-list  news-list-cat-id-6 blue\">")
+				{
+					finTab = i;
+				}
+			}
+
+			List<String> listCommunique = new List<String>();
+			string[] tabCommunique = new string[finTab - debutTab];
+			Array.Copy (tabHtml, debutTab, tabCommunique, 0, finTab - debutTab);
+
+			for (int i = 0; i < tabCommunique.Length; i++) 
+			{
+				//Console.WriteLine (tabCommunique [i]);
+				try
+				{
+					if (tabCommunique [i].Substring (0, 4) == "<h3>")
+					{
+						tabCommunique [i] = tabCommunique [i].Replace("<h3>","");
+						tabCommunique [i] = tabCommunique [i].Replace("</h3>","");
+						listCommunique.Add(tabCommunique[i]);
+
+					}
+				}
+				catch 
+				{
+
+				}
+			}
+
+			/*foreach (string title in listCommunique)
+			{
+				titles = titles + title + "\n";
+			} */
+
+			return listCommunique;
+
+		}
+
+
+		public static String getLinksCommunique(int indexArticle)
+		{
+			string[] tabHtml = getHtml("http://www.cium.be/fr/actualites/").Split('\n');
+
+			//Separation tableaux communiques de presse et actualités du cium
+
+			int debutTab = 0;
+			int finTab = 0;
+			for (int i = 0; i < tabHtml.Length; i++) 
+			{
+				if (tabHtml[i] == "<div class=\"news-list  news-list-cat-id-5 orange\">")
+				{
+					debutTab = i;
+				}
+
+				if (tabHtml[i] == "<div class=\"news-list  news-list-cat-id-6 blue\">")
+				{
+					finTab = i;
+				}
+			}
+
+
+			List<String> listCommuniqueLiens = new List<String>();
+			string[] tabCommunique = new string[finTab - debutTab];
+			Array.Copy (tabHtml, debutTab, tabCommunique, 0, finTab - debutTab);
+
+			for (int i = 0; i < tabCommunique.Length; i++) 
+			{
+				try
+				{
+					if (tabCommunique[i].Substring(0, 28) == "<p><a class=\"news-more-link\"")
+					{
+						listCommuniqueLiens.Add(tabCommunique[i].Substring(35, tabCommunique[i].Length-99));
+					}
+				}
+				catch 
+				{
+
+				}
+			}
+			try
+			{
+			return listCommuniqueLiens[indexArticle];
+			}
+			catch 
+			{
+				return "Error";
+			}
+
+		}
+			
+		public static List<String> getTitlesActualite()
+		{
+			string[] tabHtml = getHtml("http://www.cium.be/fr/actualites/").Split('\n');
+			string titles = "";
+
+			//Separation tableaux communiques de presse et actualités du cium
+
+			int debutTab = 0;
+			int finTab = 0;
+			for (int i = 0; i < tabHtml.Length; i++) 
+			{
+				if (tabHtml[i] == "<div class=\"news-list  news-list-cat-id-5 orange\">")
+				{
+					debutTab = i;
+				}
+
+				if (tabHtml[i] == "<div class=\"news-list  news-list-cat-id-6 blue\">")
+				{
+					finTab = i;
+				}
+			}
+
+			List<String> listActualite = new List<String>();
+			string[] tabActualite = new string[tabHtml.Length - finTab];
+			Array.Copy (tabHtml, finTab, tabActualite, 0, tabHtml.Length - finTab);
+
+			for (int i = 0; i < tabActualite.Length; i++) 
+			{
+				//Console.WriteLine (tabCommunique [i]);
+				try
+				{
+					if (tabActualite [i].Substring (0, 4) == "<h3>")
+					{
+						tabActualite [i] = tabActualite [i].Replace("<h3>","");
+						tabActualite [i] = tabActualite [i].Replace("</h3>","");
+						listActualite.Add(tabActualite[i]);
+
+					}
+				}
+				catch 
+				{
+
+				}
+			}
+
+			/*foreach (string title in listActualite)
+			{
+				titles = titles + title + "\n";
+			}*/
+
+			return listActualite;
+
+		}
+
+		public static string getLinksActualite(int indexArticle)
+		{
+			string[] tabHtml = getHtml("http://www.cium.be/fr/actualites/").Split('\n');
+
+			//Separation tableaux communiques de presse et actualités du cium
+
+			int debutTab = 0;
+			int finTab = 0;
+			for (int i = 0; i < tabHtml.Length; i++) 
+			{
+				if (tabHtml[i] == "<div class=\"news-list  news-list-cat-id-5 orange\">")
+				{
+					debutTab = i;
+				}
+
+				if (tabHtml[i] == "<div class=\"news-list  news-list-cat-id-6 blue\">")
+				{
+					finTab = i;
+				}
+			}
+
+			List<String> listActualiteLiens = new List<String>();
+			string[] tabActualite = new string[tabHtml.Length - finTab];
+			Array.Copy (tabHtml, finTab, tabActualite, 0, tabHtml.Length - finTab);
+
+			for (int i = 0; i < tabActualite.Length; i++) 
+			{
+				//Console.WriteLine (tabCommunique [i]);
+				try
+				{
+					if (tabActualite[i].Substring(0, 28) == "<p><a class=\"news-more-link\"")
+					{
+						listActualiteLiens.Add(tabActualite[i].Substring(35, tabActualite[i].Length-99));//.Substring(35, > - 1));
+					}
+				}
+				catch 
+				{
+
+				}
+			}
+
+			try
+			{
+				return listActualiteLiens[indexArticle];
+			}
+			catch 
+			{
+				return "Error";
+			}
+
+		}
+
+		public static string getParagraphes(String url)
+		{
+
+			string[] tabHtml = getHtml(url).Split('\n');
+			string paragraphe = "";
+			List<String> listParagraphes = new List<String>();
+
+			string pattern = @"<[^>]*>";
+			string replacement = "";
+			Regex regex = new Regex (pattern);
+
+			for (int i = 0; i < tabHtml.Length; i++) 
+			{
+				try
+				{
+					if (tabHtml [i].Substring (0, 3) == "<p>")
+					{
+						tabHtml[i] = regex.Replace(tabHtml[i], replacement); //Mettre cette ligne en commentaire pour avoir les balises HTML
+						tabHtml [i] = tabHtml [i].Replace("&#8211;","-");
+						tabHtml [i] = tabHtml [i].Replace("&rsquo;","'");
+						tabHtml [i] = tabHtml [i].Replace("&nbsp;","");
+
+
+						listParagraphes.Add(tabHtml[i]);
+					}
+
+				}
+				catch 
+				{
+
+				}
+			}
+
+			foreach (string title in listParagraphes)
+			{
+				paragraphe = paragraphe + title + "\n";
+			}
+			return paragraphe;
+		}
+	}
+}
