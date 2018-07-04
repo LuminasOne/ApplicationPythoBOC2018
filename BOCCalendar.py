@@ -186,12 +186,12 @@ def dumpdatas():
         #fp.write("Informations récuperées après filtrage\n")
         json.dump(bylocation,fp)
 
-elementsInError=[]
+
 # 3ème  étape algorithme de vérification
 def check_conflict(setdatas):
     bydate = sorted(setdatas, key=lambda dates: dates[0])  # tri en fonction des dates de début.
     print(bydate)
-    #elementsInError=[]
+
     for rangeA, rangeB in zip(bydate[0:], bydate[1:]):
         # on fais sur les deux range   la Range  A prend les éléments de la premiere tuple
         #print rangeA, rangeB
@@ -208,23 +208,21 @@ def check_conflict(setdatas):
         #lors de l'appel de cette fonction il faut préciser si ça concernent des salles identiques
         if rangeAstart== rangeBstart:
             print("Attention il y'a un chevauchement")
-            with open ('anomalielist.txt','w'):
-                elementsInError.append(rangeAstart)
+            #with open ('anomalielist.txt','w'):
+                # elementsInError.append(rangeAstart)
             print(rangeAstart)
+            return False
 
             #return rangeAstart
         #else:
-         #  print("Rien a signale")
-        #elementsineror or filedescriptor.("rien a signalé")
-    elementsInError.append("rien a signalé")
-    return elementsInError
 
+    return True
 
 #dictionnaire pour  stocker les salles qui comportent différents conflits
 myconflit=defaultdict(list)
 salle=""
 events=defaultdict(list)
-anomalie=defaultdict(list)
+
 
 #  Ici j'applique l'algorithme sur les agendas et le fichier.json que j'ai récupéré
 #  Petit doute  rez_conflicts  ne prend pas de paramètres?
@@ -256,29 +254,8 @@ def rez_conflicts():
                     #dans un premiere temps on essaye juste de recupere les salles
                     # on remplace cette lignes qui ne traité que un seul evenement(appelé 'e' )a la fois
                     #myconflit["Liste des Salles de conflit"].append((salle,e))
-                    # cette ligne sert a veiller  que chaque ligne soit individuelle  et une seule fois dans le fichier. Par contre il reste a determiner  si les cours qu'ils sont plusieurs fois dans la semaine seront aussi supprimé techniquemnt non car la ligne est différente
-                    # unique = {repr(each): each for each in e}.values()
+
                     myconflit["Liste des Salles de conflit "].append((salle,events))
-                    anomalie.append(elementsInError,salle)
-                    #print(unique)
-
-                    #if  salle=="Espace médiathèque":
-                        #myconfl["Les te-ti  de l'espace médaitheque ne devront pas être inclut]
-                        # OU
-                        #~ file.write("Concernent les TE-TI donc ce n'est pas un conflit, veuillez vérifiez l'étape suivante')
-                   #if salle=="Espace médiathèque":
-                    #    myconflit["C'est un conflit pendant un TE-TI donc rien a signalé "]
-                    #print("%s : probleme de conflit !" % (salle))
-                    #print(salle)
-                    #print(myconflit)
-
-
-#def  solvingconflict():
- #   for  event  in myconflit:
-
-
-
-
 
 # je  transmets la liste des conflit dans un fichier  exemple.json pour ensuite l'envoyer dans un rapport
 def dump_conflict():
@@ -290,14 +267,6 @@ def dump_conflict():
         json.dump(myconflit,fd)
         #json.dump(myconflit,fd)
         print("Les donnees ont bien ete rajoutees")
-
-
-#
-#def format_conflict():
-    #ename1 correspond au premier evenement et  ename2 corresponed au nom du second evenement.  ligne pas très propre pour le format du mail
- #   with open("rapportconflitversioning.txt",'w') as fd:
-
-  #      fd.write((salle).append["comporte des conflits  sur ce créneaux "].append(dtstart,dtstop).append["\n"].append["Les classes  concernées sont "].(ename).append["et "].(ename2))
 
 
 
